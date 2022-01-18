@@ -10,8 +10,8 @@ Beware that end-to-end encryption has not yet been added, so your messages will 
 
 Clone the repo and change into the directory:
 
-	$ git clone https://github.com/sosli86/cello
-	$ cd cello
+	$ git clone https://github.com/sosli86/cello-pub
+	$ cd cello-pub
 
 Run the build script:
 
