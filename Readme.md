@@ -13,9 +13,9 @@ Clone the repo and change into the directory:
 	$ git clone https://github.com/sosli86/cello-pub
 	$ cd cello-pub
 
-Run the build script:
+Run the build script with your preferred RPC server as an argument (localhost running Ganache in the example):
 
-	$ ./build.sh
+	$ ./build.sh http://localhost:7545
 
 To run the docker after it's been built, run the following command:
 
