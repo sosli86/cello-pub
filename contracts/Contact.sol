@@ -29,25 +29,13 @@ contract Contact {
     Message[] message_archive;
 
     // Adds a new User to the contract.
-    // A more developed version should require some sort of invite code.
     function addUser(string calldata newContacteeName) external returns (User[] memory) {
         user_list.push(User({user_address: msg.sender, user_name: newContacteeName}));
         return user_list;
     }
 
-//    function checkUser(address address_to_be_checked) private returns (string storage) {
-//        string memory name_to_be_checked = user_map[address_to_be_checked].user_name;
-//        return name_to_be_checked;
-//    }
-
-    // Placeholder for the invite code
-//    function addUserByAddress() {}
-
     // Adds a new Message to the contract.
-    // This should be updated to create greater security demands, such as requiring a hash
-    // of the user list provided by the user, something like this.
     function addMessage(string memory new_message_sender_name, string calldata new_message_content) external returns (Message[] memory) {
-//        require(checkUser(msg.sender)==new_message_sender_name);
         message_count += 1;
         Message memory new_message = Message({contract_address: address(this), message_number: message_count, message_sender: User({user_address: msg.sender, user_name: new_message_sender_name}), message_content: new_message_content});
         message_archive.push(new_message);
