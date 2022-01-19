@@ -23,12 +23,4 @@ To run the docker after it's been built, run the following command:
 
 ## Next steps
 
-The encryption infrastructure still needs to be added.
-
-Each contract will have its own private key, generated locally when the contract is created.
-
-Each user will have a private key and a public key, generated locally when the user is created.
-
-Three-pass protocol will be used to securely transfer the private contract key to new users.
-
-All messages sent to the contract will be encrypted and decrypted locally using the private contract key.
+The next version of the app will store public keys and a corresponding encrypted private key, generated or encrypted and stored in plaintext locally.
