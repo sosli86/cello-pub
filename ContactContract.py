@@ -34,7 +34,7 @@ class ContactContract:
         except:
             print("Failed to add user to contract.")
         try:
-            self.cur.execute('insert into user values (?, ?)', (self.user_name, self.user_address))
+            self.cur.execute('insert into user values (?, ?, ?)', (self.user_name, self.user_address, self.user_key))
             self.cur.execute('insert into user_membership values (?, ?)', (self.user_name, self.contract_name))
             self.con.commit()
         except: ("Failed to update database.")
@@ -51,7 +51,7 @@ class ContactContract:
             self.con = sqlite3.connect('contact_contract.db')
             self.cur = con.cursor
         try:
-            self.cur.execute("CREATE TABLE user (user_name text not null unique primary key, user_address text not null unique)")
+            self.cur.execute("CREATE TABLE user (user_name text not null unique primary key, user_address text not null unique, user_key text not null unique)")
             self.cur.execute("CREATE TABLE contract (contract_name text not null unique primary key, contract_address text not null unique)")
             self.cur.execute("CREATE TABLE user_membership (user_name text not null, contract_name text not null, foreign key (user_name) references user (user_name),foreign key (contract_name) references contract (contract_name))")
             print("Database populated with tables.")
@@ -72,12 +72,18 @@ class ContactContract:
         for message in self.contract.functions.addMessage(self.user_name, "").call():
             try:
                 if message[2][1] and message[3]:
-#                    print(f'{message[2][1]}: {message[3]}')
-                    log.append(f'{message[2][1]}: {message[3]}')
+                    log.append(f'{message[2][1]})', f'{message[3]}')
             except:
                 print("oops")
         return log
+    
+    def showUserKeys(self):
+    	log = []
+    	for user in self.contract.functions.getUserList().call():
+    		log.append(f'{user[2]}')
 
+    def validateUser(self, user_name, user_cipher):
+    	self.contract.functions.validateUser(user_name, user_cipher)
 
     def __init__(self, user_name='', user_address='', contract_name=''):
         self.abi=json.loads(open('/app/build/Contact.json').read())
